@@ -1,8 +1,8 @@
 {
   "name": "iranlegal-android-app",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
-  "description": "اپ اندروید ابزارهای حقوقی ایران لگال با آیکون اختصاصی، Splash تمام‌صفحه و مدیریت صحیح دکمه بازگشت",
+  "description": "اپ اندروید ابزارهای حقوقی ایران لگال با آیکون اختصاصی، Splash تمام‌صفحه، مدیریت صحیح دکمه بازگشت و User-Agent اختصاصی اپ",
   "scripts": {
     "android:prepare": "node scripts/prepare-android.mjs",
     "android:patch": "node scripts/patch-android.mjs",

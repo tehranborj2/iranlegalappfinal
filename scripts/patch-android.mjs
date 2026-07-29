@@ -10,8 +10,8 @@ const manifestPath = path.join(appMain, 'AndroidManifest.xml');
 const brandingRoot = path.join(root, 'android-branding');
 
 const packageName = 'com.iranlegal.tools';
-const versionCode = '9';
-const versionName = '1.0.3';
+const versionCode = '10';
+const versionName = '1.0.4';
 const iconName = 'iranlegal_launcher';
 const roundIconName = 'iranlegal_launcher_round';
 const splashLogoName = 'iranlegal_splash_logo';
@@ -19,6 +19,7 @@ const splashPlaceholderName = 'iranlegal_splash_placeholder';
 const splashBackgroundName = 'iranlegal_splash_background';
 const splashDurationMs = 1000;
 const splashFadeDurationMs = 180;
+const appUserAgentToken = 'IranLegalApp/1.0.4';
 
 function requireFile(filePath, message) {
   if (!fs.existsSync(filePath)) throw new Error(message);
@@ -194,6 +195,7 @@ import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
     private static final String LOCAL_HOME = "https://localhost/";
+    private static final String APP_USER_AGENT_TOKEN = "${appUserAgentToken}";
     private static final long BRANDED_SPLASH_DURATION_MS = ${splashDurationMs}L;
     private static final long BRANDED_SPLASH_FADE_MS = ${splashFadeDurationMs}L;
 
@@ -202,6 +204,7 @@ public class MainActivity extends BridgeActivity {
         super.onCreate(savedInstanceState);
 
         configureSystemBars();
+        configureAppUserAgent();
         registerBackHandler();
 
         // فقط در ایجاد تازه Activity نمایش داده می‌شود؛ Back داخل WebView آن را دوباره اجرا نمی‌کند.
@@ -216,6 +219,22 @@ public class MainActivity extends BridgeActivity {
         getWindow().getDecorView().setSystemUiVisibility(
             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         );
+    }
+
+    private void configureAppUserAgent() {
+        WebView webView = getBridge() != null ? getBridge().getWebView() : null;
+        if (webView == null) return;
+
+        String currentUserAgent = webView.getSettings().getUserAgentString();
+        if (currentUserAgent == null) currentUserAgent = "";
+
+        // capacitor.config.json نیز همین شناسه را اضافه می‌کند؛ این بخش فقط یک محافظ بومی است.
+        if (!currentUserAgent.contains("IranLegalApp/")) {
+            String separator = currentUserAgent.trim().isEmpty() ? "" : " ";
+            webView.getSettings().setUserAgentString(
+                currentUserAgent.trim() + separator + APP_USER_AGENT_TOKEN
+            );
+        }
     }
 
     private void showBrandedLaunchOverlay() {
@@ -372,3 +391,4 @@ console.log(`Android patched: ${packageName}, versionCode ${versionCode}, versio
 console.log(`Launcher icon: @mipmap/${iconName}`);
 console.log(`Splash: full logo on white for ${splashDurationMs} ms; no circular system logo`);
 console.log('Back: remote tool/page -> local app home; local home -> background');
+console.log(`User-Agent: ${appUserAgentToken}`);

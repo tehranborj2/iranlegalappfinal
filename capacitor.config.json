@@ -11,6 +11,7 @@
   },
   "android": {
     "allowMixedContent": false,
-    "backgroundColor": "#FBF6F0"
+    "backgroundColor": "#FBF6F0",
+    "appendUserAgent": " IranLegalApp/1.0.4"
   }
 }
