@@ -1,0 +1,22 @@
+{
+  "name": "iranlegal-android-app",
+  "version": "1.0.3",
+  "private": true,
+  "description": "اپ اندروید ابزارهای حقوقی ایران لگال با آیکون اختصاصی، Splash تمام‌صفحه و مدیریت صحیح دکمه بازگشت",
+  "scripts": {
+    "android:prepare": "node scripts/prepare-android.mjs",
+    "android:patch": "node scripts/patch-android.mjs",
+    "android:open": "npx cap open android",
+    "android:run": "npx cap run android"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.4.2",
+    "@capacitor/core": "8.4.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.4.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

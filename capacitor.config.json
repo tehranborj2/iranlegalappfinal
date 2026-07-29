@@ -1,0 +1,16 @@
+{
+  "appId": "com.iranlegal.tools",
+  "appName": "ابزارهای حقوقی ایران لگال",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": [
+      "iran-legal.com",
+      "www.iran-legal.com"
+    ]
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#FBF6F0"
+  }
+}
